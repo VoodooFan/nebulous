@@ -38,7 +38,7 @@ done
 echo "Note: Creating user '$USER_STEAM'." &&\
 useradd --create-home --base-dir "$BASE_DIR" --shell /bin/bash "$USER_STEAM" &&\
 echo "Note: Please enter a new password for user '$USER_STEAM'." &&\
-passwd steam &&\
+passwd "$USER_STEAM" &&\
 { echo "Note: User '$USER_STEAM' has been created."; } ||\
 { echo "Error: Unable to create user '$USER_STEAM'."; exit 3; }
 
