@@ -27,7 +27,7 @@ fi
 
 # asking for okay
 while true; do
-  read -p "Do you want to proceed? (y/n) " yn
+  read -p "Do you want to install Steam and Nebulous Dedicated Server? (y/n) " yn
   case $yn in
     [yY] ) echo "Note: Starting..."; break;;
     [nN] ) echo "Note: The installation was aborted."; exit 0;;
