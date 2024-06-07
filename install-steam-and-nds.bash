@@ -81,6 +81,10 @@ echo "#!/bin/sh" > update-nds &&\
 echo "systemctl --quiet is-active nds.service && echo \"Error: nds.service must not be active.\" || steamcmd +login anonymous +app_update 2353090 validate +quit" >> update-nds &&\
 chmod +x update-nds &&\
 chown "$USER_STEAM": update-nds &&\
+echo "#!/bin/sh" > delete-nds-mods &&\
+echo "systemctl --quiet is-active nds.service && echo \"Error: nds.service must not be active.\" || { echo \"Do you want to delete all mods for Nebulous Dedicated Server? (y/n)\"; rm -Irv $BASE_DIR/$USER_STEAM/nds/steamapps/workshop/content/887570 $BASE_DIR/$USER_STEAM/nds/steamapps/workshop/appworkshop_887570.acf; }" >> delete-nds-mods &&\
+chmod +x delete-nds-mods &&\
+chown "$USER_STEAM": delete-nds-mods &&\
 { echo "Note: User files for user '$USER_STEAM' have been created."; } ||\
 { echo "Error: Unable to create user files for user '$USER_STEAM'."; exit 7; }
 
