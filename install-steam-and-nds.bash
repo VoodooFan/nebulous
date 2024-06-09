@@ -8,7 +8,7 @@ BASE_DIR="/srv"
 
 # checking for root and display info
 if [ $(whoami) = 'root' ]; then
-  echo "Note: This script will create user '$USER_STEAM' in $BASE_DIR/$USER_STEAM and will also install Nebulous Dedicated Server for that user."
+  echo "Note: This script will create user '$USER_STEAM' in '$BASE_DIR/$USER_STEAM' and will also install Nebulous Dedicated Server for that user."
 else
   echo "Error: This script must be run as root."
   exit 1
@@ -82,14 +82,14 @@ echo "systemctl --quiet is-active nds.service && echo \"Error: nds.service must 
 chmod +x update-nds &&\
 chown "$USER_STEAM": update-nds &&\
 echo "#!/bin/sh" > delete-nds-mods &&\
-echo "systemctl --quiet is-active nds.service && echo \"Error: nds.service must not be active.\" || { echo \"Do you want to delete all mods for Nebulous Dedicated Server? (y/n)\"; rm -Irv $BASE_DIR/$USER_STEAM/nds/steamapps/workshop/content/887570 $BASE_DIR/$USER_STEAM/nds/steamapps/workshop/appworkshop_887570.acf; }" >> delete-nds-mods &&\
+echo "systemctl --quiet is-active nds.service && echo \"Error: nds.service must not be active.\" || { echo \"Do you want to delete all mods for Nebulous Dedicated Server? (y/n)\"; rm -Irv \"$BASE_DIR/$USER_STEAM/nds/steamapps/workshop/content/887570\" \"$BASE_DIR/$USER_STEAM/nds/steamapps/workshop/appworkshop_887570.acf; }\"" >> delete-nds-mods &&\
 chmod +x delete-nds-mods &&\
 chown "$USER_STEAM": delete-nds-mods &&\
 { echo "Note: User files for user '$USER_STEAM' have been created."; } ||\
 { echo "Error: Unable to create user files for user '$USER_STEAM'."; exit 7; }
 
 # installing Nebulous Dedicated Server for user $USER_STEAM
-echo "Note: Installing Nebulous Dedicated Server for user '$USER_STEAM'."
+echo "Note: Installing Nebulous Dedicated Server for user '$USER_STEAM'." &&\
 sudo -iu "$USER_STEAM" "$BASE_DIR/$USER_STEAM/bin/update-nds" &&\
 cd "$BASE_DIR/$USER_STEAM" &&\
 ln --force --symbolic ".steam/root/steamapps/common/NEBULOUS Dedicated Server" nds &&\
@@ -117,10 +117,10 @@ echo "WantedBy=multi-user.target" >> nds.service &&\
 echo "" >> nds.service &&\
 echo "[Service]" >> nds.service &&\
 echo "Type=simple" >> nds.service &&\
-echo "ExecStart=$BASE_DIR/$USER_STEAM/nds/NebulousDedicatedServer -nographics -batchmode -logFile $BASE_DIR/$USER_STEAM/nds.log -serverConfig $BASE_DIR/$USER_STEAM/nds.conf" >> nds.service &&\
-echo "WorkingDirectory=$BASE_DIR/$USER_STEAM/nds/" >> nds.service &&\
-echo "User=$USER_STEAM" >> nds.service &&\
-echo "Group=$USER_STEAM" >> nds.service &&\
+echo "ExecStart=\"$BASE_DIR/$USER_STEAM/nds/NebulousDedicatedServer\" -nographics -batchmode -logFile \"$BASE_DIR/$USER_STEAM/nds.log\" -serverConfig \"$BASE_DIR/$USER_STEAM/nds.conf\"" >> nds.service &&\
+echo "WorkingDirectory=\"$BASE_DIR/$USER_STEAM/nds/\"" >> nds.service &&\
+echo "User=\"$USER_STEAM\"" >> nds.service &&\
+echo "Group=\"$USER_STEAM\"" >> nds.service &&\
 echo "Restart=always" >> nds.service &&\
 echo "RestartSec=30" >> nds.service &&\
 { echo "Note: Daemon nds.service has been created."; } ||\
@@ -128,9 +128,9 @@ echo "RestartSec=30" >> nds.service &&\
 
 # editing the server config file nds.conf
 while true; do
-  read -p "Do you want to edit the server config file $BASE_DIR/$USER_STEAM/nds.conf now? (y/n) " yn
+  read -p "Do you want to edit the server config file '$BASE_DIR/$USER_STEAM/nds.conf' now? (y/n) " yn
   case $yn in
-    [yY] ) echo "Note: editor $BASE_DIR/$USER_STEAM/nds.conf"; editor "$BASE_DIR/$USER_STEAM/nds.conf"; break;;
+    [yY] ) echo "Note: editor \"$BASE_DIR/$USER_STEAM/nds.conf\""; editor "$BASE_DIR/$USER_STEAM/nds.conf"; break;;
     [nN] ) echo "Note: Using default settings."; break;;
   esac
 done
