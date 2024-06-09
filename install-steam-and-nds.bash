@@ -118,9 +118,9 @@ echo "" >> nds.service &&\
 echo "[Service]" >> nds.service &&\
 echo "Type=simple" >> nds.service &&\
 echo "ExecStart=\"$BASE_DIR/$USER_STEAM/nds/NebulousDedicatedServer\" -nographics -batchmode -logFile \"$BASE_DIR/$USER_STEAM/nds.log\" -serverConfig \"$BASE_DIR/$USER_STEAM/nds.conf\"" >> nds.service &&\
-echo "WorkingDirectory=\"$BASE_DIR/$USER_STEAM/nds/\"" >> nds.service &&\
-echo "User=\"$USER_STEAM\"" >> nds.service &&\
-echo "Group=\"$USER_STEAM\"" >> nds.service &&\
+echo "WorkingDirectory=$BASE_DIR/$USER_STEAM/nds/" >> nds.service &&\
+echo "User=$USER_STEAM" >> nds.service &&\
+echo "Group=$USER_STEAM" >> nds.service &&\
 echo "Restart=always" >> nds.service &&\
 echo "RestartSec=30" >> nds.service &&\
 { echo "Note: Daemon nds.service has been created."; } ||\
