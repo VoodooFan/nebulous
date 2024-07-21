@@ -1,6 +1,33 @@
 #!/bin/bash
 # Author: VoodooFan (kfi@kyberraum-festung-iserlohn.de)
-# Date:   2024-06-06
+# Date:   2024-07-21
+# About:  This linux bash script is able to install a default
+#         Nebulous Dedicated Server onto your Linux (Debian/Ubuntu)
+#         machine. It also creates a Linux user account named steam
+#         (default home directory is /srv/steam), which you can use to
+#         maintain your dedicated server. There are also 2 small bash
+#         scripts within the home directory of that user, named
+#         ~/bin/update-nds - which allows you to easily update your
+#         server - and ~/bin/delete-nds-mods - which allows you to
+#         delete all mods from your server. Additional to that, the
+#         server configuration file nds.conf, the server log file
+#         nds.log and the symbolic link nds to the server files are
+#         also located right within the home directory.
+#
+# Copyright 2024 VoodooFan (kfi@kyberraum-festung-iserlohn.de)
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # variables
 USER_STEAM="steam"
