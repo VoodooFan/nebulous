@@ -104,6 +104,7 @@ cd "$BASE_DIR/$USER_STEAM" &&\
 mkdir --parents bin &&\
 chown "$USER_STEAM": bin &&\
 cd bin &&\
+(test -f /usr/games/steamcmd && ln --force --symbolic /usr/games/steamcmd && chown --no-dereference "$USER_STEAM": steamcmd) &&\
 echo "#!/bin/sh" > update-nds &&\
 echo "systemctl --quiet is-active nds.service && echo \"Error: nds.service must not be active.\" || steamcmd +login anonymous +app_update 2353090 validate +quit" >> update-nds &&\
 chmod +x update-nds &&\
